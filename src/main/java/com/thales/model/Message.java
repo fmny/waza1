@@ -1,11 +1,16 @@
 package com.thales.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +31,16 @@ public class Message {
     @NonNull
     private String contents;
 
-
-    @ManyToMany(mappedBy = "messagesReceived")
-    private List<User> receivers=new ArrayList<>();
+    //A voir si on supprime, le chat fait deja office de receveurs
+    //@ManyToMany(mappedBy = "messagesReceived")
+    //@JsonIgnore
+    //private List<User> receivers=new ArrayList<>();
 
     @ManyToOne
+    @JsonIgnoreProperties({"messages","users"})
     private Chat chat;
+
+
+    private LocalDateTime dateMessage = LocalDateTime.now();
 
 }

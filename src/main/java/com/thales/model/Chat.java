@@ -1,5 +1,7 @@
 package com.thales.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,9 +22,11 @@ public class Chat {
     private String name;
 
     @OneToMany(mappedBy = "chat")
+    @JsonIgnoreProperties("chat")
     private List<Message> messages=new ArrayList<>();
 
     @ManyToMany
+    @JsonIgnoreProperties("chats")
     private List<User> users=new ArrayList<>();
 
 }

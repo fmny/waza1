@@ -45,7 +45,7 @@ public class DataInsertController {
         this.chatDao.save(chat2);
 
         //on crée ensuite les Users
-        User user1=new User("test","test","test");
+        User user1=new User("monPseudo","t","");
         User user2=new User("pseudo1","log1","mdp1");
         User user3=new User("pseudo2","log2","mdp2");
         User user4=new User("pseudo3","log3","mdp3");
@@ -83,6 +83,7 @@ public class DataInsertController {
         Message message4=new Message(user4,"message 1 de user4");
 
         //on crée les messages reçus
+        /*
         Message messageReceived11=new Message(user3,"messageReceived 1 par user1 envoyé par user 3");
         Message messageReceived12=new Message(user2,"messageReceived 1 par user1 envoyé par  user 2");
         Message messageReceived21=new Message(user2,"messageReceived 2 par user1 envoyé par user2");
@@ -92,7 +93,7 @@ public class DataInsertController {
         this.messageDao.save(messageReceived12);
         this.messageDao.save(messageReceived21);
         this.messageDao.save(messageReceived3);
-
+*/
 
         //on associe les Messages aux Chats
         message11.setChat(chat1);
@@ -102,6 +103,8 @@ public class DataInsertController {
         message22.setChat(chat1);
         message3.setChat(chat2);
         message4.setChat(chat2);
+
+
 
         //on sauvegarde les messages
         this.messageDao.save(message11);
@@ -114,6 +117,8 @@ public class DataInsertController {
 
 
         //on associe les Messages aux Users (qui reçoit quoi)
+        //je retire pour dire que ceux qui recoivent le message sont les personnes du chat
+        /*
         user1.getMessagesReceived().add(message11);
         user1.getMessagesReceived().add(message12);
         user1.getMessagesReceived().add(message13);
@@ -127,6 +132,8 @@ public class DataInsertController {
         user1.getMessagesReceived().add(messageReceived21);
         user1.getMessagesReceived().add(messageReceived3);
 
+
+
         //on associe les messages aux Chats
         messageReceived11.setChat(chat1);
         messageReceived12.setChat(chat1);
@@ -138,6 +145,19 @@ public class DataInsertController {
         this.messageDao.save(messageReceived12);
         this.messageDao.save(messageReceived21);
         this.messageDao.save(messageReceived3);
+*/
+        //On ajoute des amis aux users
+        user1.getFriends().add(user2);
+        user1.getFriends().add(user3);
+        user1.getFriends().add(user4);
+
+        user2.getFriends().add(user1);
+        user2.getFriends().add(user5);
+        user2.getFriends().add(user6);
+
+        this.userDao.save(user1);
+        this.userDao.save(user2);
+
 
     }
 

@@ -36,7 +36,7 @@ public class UserController {
         this.userDao.deleteById(id);
     }
 
-    @PostMapping({"connect/", "connect"}) //modif Pat il a mis Get au lieu de Post
+    @PostMapping({"connect/", "connect"})
     public User tryConnect(@RequestBody User user) {
 
         User tryToConnect = this.userDao.findByLogin(user.getLogin());
@@ -47,5 +47,21 @@ public class UserController {
         return tryToConnect;
     }
 
+    //Ajout par rapport à SchoolManagement
+    //@GetMapping({"find/{id}/", "find/{id}"})
+    //public List<Teacher> findBySchool(@PathVariable Integer id){ return this.teacherDao.findBySchool_id(id);}
+
+
+    @GetMapping({"count/{id}/", "count/{id}"})
+    public long countBySchool(@PathVariable Integer id){
+        return this.userDao.countByChats_id(id);
+    }
+
+    //Renvoie la liste des users du chat d'id 2
+    //http://localhost:8080/waza/api/users/find/2
+    @GetMapping({"find/{id}/", "find/{id}"})
+    public List<User> findByChat(@PathVariable Integer id){
+        return this.userDao.findByChats_id(id);
+    }
 
 }
